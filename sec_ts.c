@@ -1872,11 +1872,12 @@ inline void sec_ts_kfifo_push_coord(struct sec_ts_data *ts, u8 slot)
 
 inline void sec_ts_kfifo_pop_all_coords(struct sec_ts_data *ts)
 {
+	int __maybe_unused len;
 	/*
 	 * Keep coords without pop-out to support different timing
 	 * print-out by each caller.
 	 */
-	kfifo_out_peek(&debug_fifo, last_coord, kfifo_size(&debug_fifo));
+	len = kfifo_out_peek(&debug_fifo, last_coord, kfifo_size(&debug_fifo));
 }
 
 inline void sec_ts_debug_dump(struct sec_ts_data *ts)
