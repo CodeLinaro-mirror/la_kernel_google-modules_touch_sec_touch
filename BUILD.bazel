@@ -24,10 +24,10 @@ kernel_module(
         "sec_touch.ko",
     ],
     kernel_build = "//gs/google-modules/soc-modules:slider",
-    kernel_module_deps = [
-        "//gs/google-modules/touch/common:common.slider",
-    ],
     visibility = [
         "//gs/google-modules/soc-modules:__pkg__",
+    ],
+    deps = [
+        "//gs/google-modules/touch/common:common.slider",
     ],
 )
