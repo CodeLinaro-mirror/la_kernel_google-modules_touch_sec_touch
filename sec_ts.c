@@ -4410,8 +4410,7 @@ static struct notifier_block sec_ts_psy_nb;
 #endif
 
 #ifdef I2C_INTERFACE
-static int sec_ts_probe(struct i2c_client *client,
-			const struct i2c_device_id *id)
+static int sec_ts_probe(struct i2c_client *client)
 #else
 static int sec_ts_probe(struct spi_device *client)
 #endif
@@ -6192,7 +6191,7 @@ static const struct of_device_id sec_ts_match_table[] = {
 
 #ifdef I2C_INTERFACE
 static struct i2c_driver sec_ts_driver = {
-	.probe		= sec_ts_probe,
+	.probe_new	= sec_ts_probe,
 	.remove		= sec_ts_remove,
 	.shutdown	= sec_ts_shutdown,
 	.id_table	= sec_ts_id,
