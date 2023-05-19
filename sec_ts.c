@@ -4872,7 +4872,7 @@ static int sec_ts_probe(struct spi_device *client)
 #endif
 
 #ifndef CONFIG_SEC_SYSFS
-	sec_class = class_create(THIS_MODULE, "sec");
+	sec_class = class_create("sec");
 #endif
 
 	device_init_wakeup(&client->dev, true);
