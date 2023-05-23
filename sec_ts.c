@@ -3199,6 +3199,9 @@ static void sec_ts_read_event(struct sec_ts_data *ts)
 				switch (status_data_1) {
 				case 0x20:
 					/* watchdog reset !? */
+					input_err(true, &ts->client->dev,
+						"Touch - unexpected reset! Reason : WDT \n");
+
 					sec_ts_locked_release_all_finger(ts);
 					ret = sec_ts_write(ts,
 						SEC_TS_CMD_SENSE_ON, NULL, 0);
