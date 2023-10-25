@@ -6309,7 +6309,7 @@ static const struct of_device_id sec_ts_match_table[] = {
 
 #ifdef I2C_INTERFACE
 static struct i2c_driver sec_ts_driver = {
-	.probe_new	= sec_ts_probe,
+	.probe		= sec_ts_probe,
 	.remove		= sec_ts_remove,
 	.shutdown	= sec_ts_shutdown,
 	.id_table	= sec_ts_id,
