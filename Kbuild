@@ -5,6 +5,10 @@ ccflags-y += -I$(srctree)/../private/google-modules/display/include/uapi
 ccflags-y += -I$(srctree)/../private/google-modules/touch/common
 ccflags-y += -I$(srctree)/../private/google-modules/touch/common/include
 
+CFLAGS_sec_ts.o += -Wno-missing-prototypes
+CFLAGS_sec_ts_fn.o += -Wno-missing-prototypes
+CFLAGS_sec_ts_fw.o += -Wno-missing-prototypes
+
 obj-$(CONFIG_TOUCHSCREEN_SEC_TS)   += sec_touch.o
 sec_touch-objs   += sec_ts.o sec_ts_fw.o sec_ts_fn.o sec_cmd.o \
 	sec_ts_only_vendor.o
