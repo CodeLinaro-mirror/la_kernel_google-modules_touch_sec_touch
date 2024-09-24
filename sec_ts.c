@@ -3849,7 +3849,7 @@ static int sec_ts_parse_dt(struct spi_device *client)
 
 	pdata->irq_gpio = of_get_named_gpio(np, "sec,irq_gpio", 0);
 	if (gpio_is_valid(pdata->irq_gpio)) {
-		ret = gpio_request_one(pdata->irq_gpio, GPIOF_DIR_IN,
+		ret = gpio_request_one(pdata->irq_gpio, GPIOF_IN,
 				       "sec,tsp_int");
 		if (ret) {
 			input_err(true, &client->dev,
