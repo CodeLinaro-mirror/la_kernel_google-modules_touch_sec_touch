@@ -6235,6 +6235,7 @@ static int register_panel_bridge(struct sec_ts_data *ts)
 	ts->panel_bridge.of_node = ts->client->dev.of_node;
 #endif
 	ts->panel_bridge.funcs = &panel_bridge_funcs;
+	INIT_LIST_HEAD(&ts->panel_bridge.list);
 	drm_bridge_add(&ts->panel_bridge);
 
 	return 0;
