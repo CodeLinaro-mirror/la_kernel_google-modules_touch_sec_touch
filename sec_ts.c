@@ -14,6 +14,7 @@ struct sec_ts_data *tsp_info;
 
 #include "sec_ts.h"
 #include <samsung/exynos_drm_connector.h>
+#include <drm/drm_atomic_state_helper.h>
 
 /* init the kfifo for health check. */
 #define SEC_TS_HC_KFIFO_LEN 4 /* must be power of 2. */
@@ -6171,7 +6172,8 @@ static bool bridge_is_lp_mode(struct drm_connector *connector)
 	return false;
 }
 
-static void panel_bridge_enable(struct drm_bridge *bridge)
+static void panel_bridge_enable(struct drm_bridge *bridge,
+				struct drm_atomic_commit *commit)
 {
 	struct sec_ts_data *ts =
 		container_of(bridge, struct sec_ts_data, panel_bridge);
@@ -6181,7 +6183,8 @@ static void panel_bridge_enable(struct drm_bridge *bridge)
 		sec_ts_set_bus_ref(ts, SEC_TS_BUS_REF_SCREEN_ON, true);
 }
 
-static void panel_bridge_disable(struct drm_bridge *bridge)
+static void panel_bridge_disable(struct drm_bridge *bridge,
+				 struct drm_atomic_commit *commit)
 {
 	struct sec_ts_data *ts =
 		container_of(bridge, struct sec_ts_data, panel_bridge);
@@ -6223,8 +6226,11 @@ static void panel_bridge_mode_set(struct drm_bridge *bridge,
 }
 
 static const struct drm_bridge_funcs panel_bridge_funcs = {
-	.enable = panel_bridge_enable,
-	.disable = panel_bridge_disable,
+	.atomic_create_state = drm_atomic_helper_bridge_create_state,
+	.atomic_destroy_state = drm_atomic_helper_bridge_destroy_state,
+	.atomic_duplicate_state = drm_atomic_helper_bridge_duplicate_state,
+	.atomic_enable = panel_bridge_enable,
+	.atomic_disable = panel_bridge_disable,
 	.mode_set = panel_bridge_mode_set,
 };
 
